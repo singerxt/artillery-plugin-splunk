@@ -28,10 +28,20 @@ class Splunk {
     this.attachListeners()
   }
 
+  /**
+   *
+   * @param {Object} stats - stats from artillerry
+   */
+  logStatsToSplunk (stats) {
+
+  }
+
+  /**
+   * Attach listeners
+   * @return {Void}
+   */
   attachListeners () {
-    this.eventEmiter.on('stats', function (stats) {
-      console.log(stats)
-    })
+    this.eventEmiter.on('stats', this.logStatsToSplunk.bind(this))
   }
 
   /**

@@ -2,6 +2,7 @@ const { expect } = require('chai')
 const SplunkPlugin = require('../index')
 const events = require('events')
 const ee = new events.EventEmitter()
+const sinon = require('sinon')
 
 describe('Splunk', function () {
   describe('constructor', function () {
@@ -60,36 +61,54 @@ describe('Splunk', function () {
     })
   })
 
+  describe('attachListeners', function () {
+    it('should attach logStatsToSplunk to eventEmitter', function () {
+      const splunkPlugin = new SplunkPlugin({
+        plugins: {
+          splunk: {
+            token: '123',
+            url: 'http://127.0.0.1/'
+          }
+        }
+      }, ee)
+
+      splunkPlugin.logStatsToSplunk = sinon.spy()
+      splunkPlugin.attachListeners()
+      ee.emit('stats')
+      expect(splunkPlugin.logStatsToSplunk.calledOnce).to.be.eql(true)
+    })
+  })
+
   describe('validateConfig', function () {
-    it('Should not throw errors when params are all right', function () {
+    it('should not throw errors when params are all right', function () {
       expect(() => SplunkPlugin.validateConfig({
         token: '123',
         url: 'http://127.0.0.1/'
       })).to.not.throw()
     })
 
-    it('Should throw error when token is not an string', function () {
+    it('should throw error when token is not an string', function () {
       expect(() => SplunkPlugin.validateConfig({
         token: 123,
         url: 'http://127.0.0.1/'
       })).to.throw()
     })
 
-    it('Should throw error when token is not an string', function () {
+    it('should throw error when token is not an string', function () {
       expect(() => SplunkPlugin.validateConfig({
         token: null,
         url: 'http://127.0.0.1/'
       })).to.throw()
     })
 
-    it('Should throw error when url is not an string', function () {
+    it('should throw error when url is not an string', function () {
       expect(() => SplunkPlugin.validateConfig({
         token: '123',
         url: 123
       })).to.throw()
     })
 
-    it('Should throw error when url is not an string', function () {
+    it('should throw error when url is not an string', function () {
       expect(() => SplunkPlugin.validateConfig({
         token: '123',
         url: {}
