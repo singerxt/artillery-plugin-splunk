@@ -55,5 +55,5 @@ config:
 
 4. run it
 ```
-$ artillery run script.yml
+$ DEBUG=plugin:splunk artillery run script.yml
 ```

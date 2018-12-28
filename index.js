@@ -1,4 +1,5 @@
 const { Logger: SplunkLogger } = require('splunk-logging')
+const debug = require('debug')('plugin:splunk')
 
 /**
  * Plugin for artillery.io
@@ -26,6 +27,7 @@ class Splunk {
       url: this.config.url,
       index: this.config.index
     })
+    debug('Successfully initialized', this.config)
     this.attachListeners()
   }
 

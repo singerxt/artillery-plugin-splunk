@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.1.1",
     "splunk-logging": "^0.10.1"
   },
   "devDependencies": {
