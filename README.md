@@ -3,8 +3,30 @@
 [![codecov](https://codecov.io/gh/singerxt/artillery-plugin-splunk/branch/master/graph/badge.svg)](https://codecov.io/gh/singerxt/artillery-plugin-splunk)
 # artillery-plugin-splunk
 
+A plugin for artillery.io that records _stats_ and _reports_ into HTTP Event Collector in Splunk
 
-# Debbuging
+## Setup
+You need to setup HTTP event collector in splunk. [instructions](https://docs.splunk.com/Documentation/SplunkCloud/7.1.3/Data/UsetheHTTPEventCollector)
+
+1. Install
+```
+$ npm install --save artillery-plugin-splunk
+```
+2. Add artillery-plugin-splunk to config
+```
+config:
+  target: "https://staging.example.com"
+  plugins:
+    splunk:
+      url: 'XXX', # url to splunk cloud in this format https://input-prd-p-XXXXXXX.cloud.splunk.com:8088/services/collector)
+      token: 'XXX' # token for HEC
+      index: 'XXX' (optional) # splunk index
+```
+
+
+
+
+## Debbuging
 
 1. Clone repo
 ```
