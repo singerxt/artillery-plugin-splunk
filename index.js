@@ -1,4 +1,4 @@
-const { Logger: SplunkLogger } = require("splunk-logging");
+const { Logger: SplunkLogger } = require('splunk-logging')
 
 /**
  * Plugin for artillery.io
@@ -20,6 +20,18 @@ class Splunk {
     this.eventEmiter = eventEmiter
     this.config = (config && config.plugins && config.plugins.splunk) || {}
     Splunk.validateConfig(this.config)
+    this.splunkLogger = new SplunkLogger({
+      token: this.config.token,
+      url: this.config.url,
+      index: this.config.index || 'main'
+    })
+    this.attachListeners()
+  }
+
+  attachListeners () {
+    this.eventEmiter.on('stats', function (stats) {
+      console.log(stats)
+    })
   }
 
   /**

@@ -1,5 +1,7 @@
 const { expect } = require('chai')
 const SplunkPlugin = require('../index')
+const events = require('events')
+const ee = new events.EventEmitter()
 
 describe('Splunk', function () {
   describe('constructor', function () {
@@ -11,7 +13,7 @@ describe('Splunk', function () {
             url: 'http://127.0.0.1/'
           }
         }
-      })).to.not.throw()
+      }, ee)).to.not.throw()
     })
 
     it('should throw error if token parameter is wrong', function () {
