@@ -100,7 +100,8 @@ describe('Splunk', function () {
           timeStamp: 1,
           ruid: 1,
           latency: 1,
-          statusCode: 1
+          statusCode: 1,
+          type: 'latency'
         },
         metadata: {
           index: 'main'
@@ -129,7 +130,8 @@ describe('Splunk', function () {
           timeStamp: 1,
           ruid: 1,
           latency: 1,
-          statusCode: 1
+          statusCode: 1,
+          type: 'latency'
         },
         metadata: {
           index: 'test'
