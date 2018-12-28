@@ -11,7 +11,7 @@ class Splunk {
    * @param {Object} config - raw config
    * @param {Object} config.splunk - splunk plugin configuration
    * @param {string} config.splunk.token - token for splunk HEC instance
-   * @param {string} config.splunk.url - url to splunk cloud
+   * @param {string} config.splunk.url - url to splunk cloud (in this format https://input-prd-p-XXXXXXX.cloud.splunk.com:8088/services/collector)
    * @param {string} [config.splunk.index = 'main'] - splunk index
    * @param {EventEmitter} eventEmiter from artillery
    * @param eventEmiter
@@ -30,10 +30,27 @@ class Splunk {
 
   /**
    *
-   * @param {Object} stats - stats from artillerry
+   * @param {Object} stats - stats from artilery
+   * @param {Array<Array<[number, string, number, number]>>} stats._entries - Array of entries
+   * @param {Array<number>} stats._latencies - latencies
    */
-  logStatsToSplunk (stats) {
-
+  logStatsToSplunk (stats = {}) {
+    const { _entries = [] } = stats
+    for (let i = 0; i < _entries.length; i++) {
+      const [ timeStamp, ruid, latency, statusCode ] = _entries[i]
+      this.splunkLogger.send({
+        message: {
+          from: 'artillery-plugin-splunk',
+          timeStamp,
+          ruid,
+          latency,
+          statusCode
+        },
+        metadata: {
+          index: this.config.index
+        }
+      })
+    }
   }
 
   /**
@@ -49,7 +66,6 @@ class Splunk {
    * @param {Object} config - splunk plugin configuration
    * @param {string} config.token - token for splunk HEC instance
    * @param {string} config.url - url to splunk cloud
-   * @param {string} [config.index = 'main'] - splunk index
    */
   static validateConfig ({ token, url } = {}) {
     if (!token || typeof token !== 'string') {
