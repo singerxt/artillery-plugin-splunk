@@ -44,6 +44,7 @@ class Splunk {
       this.splunkLogger.send({
         message: {
           from: 'artillery-plugin-splunk',
+          type: 'latency',
           timeStamp,
           ruid,
           latency,
@@ -57,11 +58,27 @@ class Splunk {
   }
 
   /**
+   *
+   * @param {Object} message - stats from artilery
+   */
+  logDoneToSplunk (message = {}) {
+    message.from = 'artillery-plugin-splunk'
+    message.type = 'report'
+    this.splunkLogger.send({
+      message,
+      metadata: {
+        index: this.config.index
+      }
+    })
+  }
+
+  /**
    * Attach listeners
    * @return {Void}
    */
   attachListeners () {
     this.eventEmiter.on('stats', this.logStatsToSplunk.bind(this))
+    this.eventEmiter.on('done', this.logDoneToSplunk.bind(this))
   }
 
   /**
