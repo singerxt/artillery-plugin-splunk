@@ -20,10 +20,11 @@ class Splunk {
     this.eventEmiter = eventEmiter
     this.config = (config && config.plugins && config.plugins.splunk) || {}
     Splunk.validateConfig(this.config)
+    this.config.index = this.config.index || 'main'
     this.splunkLogger = new SplunkLogger({
       token: this.config.token,
       url: this.config.url,
-      index: this.config.index || 'main'
+      index: this.config.index
     })
     this.attachListeners()
   }

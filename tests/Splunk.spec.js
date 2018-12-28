@@ -79,6 +79,65 @@ describe('Splunk', function () {
     })
   })
 
+  describe('logStatsToSplunk', function () {
+    it('should map results and send logs to splunk', function () {
+      const splunkPlugin = new SplunkPlugin({
+        plugins: {
+          splunk: {
+            token: '123',
+            url: 'http://127.0.0.1/'
+          }
+        }
+      }, ee)
+
+      splunkPlugin.splunkLogger.send = sinon.spy()
+      splunkPlugin.logStatsToSplunk({
+        _entries: [[1, 1, 1, 1]]
+      })
+      expect(splunkPlugin.splunkLogger.send.args[0][0]).to.be.eql({
+        message: {
+          from: 'artillery-plugin-splunk',
+          timeStamp: 1,
+          ruid: 1,
+          latency: 1,
+          statusCode: 1
+        },
+        metadata: {
+          index: 'main'
+        }
+      })
+    })
+
+    it('should map results and send logs to splunk and should respect index from config', function () {
+      const splunkPlugin = new SplunkPlugin({
+        plugins: {
+          splunk: {
+            token: '123',
+            url: 'http://127.0.0.1/',
+            index: 'test'
+          }
+        }
+      }, ee)
+
+      splunkPlugin.splunkLogger.send = sinon.spy()
+      splunkPlugin.logStatsToSplunk({
+        _entries: [[1, 1, 1, 1]]
+      })
+      expect(splunkPlugin.splunkLogger.send.args[0][0]).to.be.eql({
+        message: {
+          from: 'artillery-plugin-splunk',
+          timeStamp: 1,
+          ruid: 1,
+          latency: 1,
+          statusCode: 1
+        },
+        metadata: {
+          index: 'test'
+        }
+      })
+    })
+  })
+
   describe('validateConfig', function () {
     it('should not throw errors when params are all right', function () {
       expect(() => SplunkPlugin.validateConfig({
