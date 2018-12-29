@@ -7,8 +7,12 @@
     "test": "./node_modules/.bin/mocha --reporter spec ./tests/*.js",
     "cov": "./node_modules/.bin/instanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./tests/*.js && codecov"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/singerxt/artillery-plugin-splunk"
+  },
   "author": "Mateusz Spiewak",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "debug": "^4.1.1",
     "splunk-logging": "^0.10.1"
