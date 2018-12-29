@@ -1,13 +1,13 @@
 {
   "name": "artillery-plugin-splunk",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Logging artillery.js reports to splunk!",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec ./tests/*.js",
     "cov": "./node_modules/.bin/instanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./tests/*.js && codecov"
   },
-  "author": "",
+  "author": "Mateusz Spiewak",
   "license": "ISC",
   "dependencies": {
     "debug": "^4.1.1",
