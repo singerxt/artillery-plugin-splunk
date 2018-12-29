@@ -2,7 +2,7 @@
 [![codeshipbuild](https://codeship.com/projects/f43b6740-ed04-0136-2ba6-6e2c9c91f302/status?branch=master)](https://codeship.com/projects/f43b6740-ed04-0136-2ba6-6e2c9c91f302/status?branch=master)
 [![codecov](https://codecov.io/gh/singerxt/artillery-plugin-splunk/branch/master/graph/badge.svg)](https://codecov.io/gh/singerxt/artillery-plugin-splunk)
 [![Known Vulnerabilities](https://snyk.io/test/github/singerxt/artillery-plugin-splunk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/singerxt/artillery-plugin-splunk?targetFile=package.json)
-
+[![npm version](https://badge.fury.io/js/artillery-plugin-splunk.svg)](https://badge.fury.io/js/artillery-plugin-splunk)
 # artillery-plugin-splunk
 
 A plugin for artillery.io that records _stats_ and _reports_ into HTTP Event Collector in Splunk
