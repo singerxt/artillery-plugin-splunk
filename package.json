@@ -1,6 +1,6 @@
 {
   "name": "artillery-plugin-splunk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Logging artillery.js reports to splunk!",
   "main": "index.js",
   "scripts": {
