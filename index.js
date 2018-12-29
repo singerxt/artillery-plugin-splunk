@@ -2,8 +2,7 @@ const { Logger: SplunkLogger } = require('splunk-logging')
 const debug = require('debug')('plugin:splunk')
 
 /**
- * Plugin for artillery.io
- *
+ * A plugin for artillery.io that records stats and reports into HTTP Event Collector in Splunk
  */
 class Splunk {
   /**
@@ -32,10 +31,11 @@ class Splunk {
   }
 
   /**
-   *
-   * @param {Object} stats - stats from artilery
+   * Mapping stats event to latency event and send it to splunk
+   * @param {Object} stats - stats from artillery
    * @param {Array<Array<[number, string, number, number]>>} stats._entries - Array of entries
    * @param {Array<number>} stats._latencies - latencies
+   * @return {undefined}
    */
   logStatsToSplunk (stats = {}) {
     const { _entries = [] } = stats
@@ -58,8 +58,9 @@ class Splunk {
   }
 
   /**
-   *
-   * @param {Object} message - stats from artilery
+   * Log final report from done event to splunk
+   * @param {Object} message - stats from artillery
+   * @return {undefined}
    */
   logDoneToSplunk (message = {}) {
     message.from = 'artillery-plugin-splunk'
@@ -74,7 +75,7 @@ class Splunk {
 
   /**
    * Attach listeners
-   * @return {Void}
+   * @return {undefined}
    */
   attachListeners () {
     this.eventEmiter.on('stats', this.logStatsToSplunk.bind(this))
