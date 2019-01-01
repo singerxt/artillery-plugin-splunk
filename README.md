@@ -7,6 +7,12 @@
 
 A plugin for artillery.io that records _stats_ and _reports_ into HTTP Event Collector in Splunk
 
+## Requirements
+
+* Node.js v4 or later.
+* Splunk Enterprise 6.3.0 or later, or Splunk Cloud.
+* An HTTP Event Collector token from your Splunk Enterprise server.
+
 ## Setup
 You need to setup HTTP event collector in splunk. [instructions](https://docs.splunk.com/Documentation/SplunkCloud/7.1.3/Data/UsetheHTTPEventCollector)
 
