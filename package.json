@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^4.1.1",
-    "splunk-logging": "^0.10.1"
+    "splunk-logging": "^0.11.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
